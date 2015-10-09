@@ -9,6 +9,7 @@ package Interface;
  *
  * @author root
  */
-public interface Command {
-    public void execute();
+public interface MouseConnector {
+    public void initFigura(double x, double y);
+    public void endFigura(double x, double y);
 }

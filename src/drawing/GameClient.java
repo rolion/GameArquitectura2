@@ -5,44 +5,49 @@
  */
 package drawing;
 
-import Nodes.GamePanel;
-import java.awt.Color;
+
+
+import Interface.Figura;
+import Interface.MouseConnector;
+import Nodes.Contenedor;
+import Nodes.LineaFlujo;
 import java.awt.Frame;
 import java.awt.Graphics;
-import java.awt.Graphics2D;
+import java.awt.Rectangle;
 import java.awt.Toolkit;
-import java.awt.geom.Ellipse2D;
-import java.awt.geom.Line2D;
-
+import javax.swing.border.Border;
 /**
  *
  * @author root
  */
-public class GameClient   extends javax.swing.JFrame{
+public class GameClient extends javax.swing.JFrame implements MouseConnector{
 
     /**
      * Creates new form NewJFrame
      */
-    private GamePanel gp;
+    private MyMouse myMouse;
+    private Figura figura;
+    private Contenedor mContenedor;
+    private Rectangle limites;
     public GameClient() {
         initComponents();
         Toolkit tk = Toolkit.getDefaultToolkit();
         double xSize = ( tk.getScreenSize().getWidth());
         double ySize = ( tk.getScreenSize().getHeight());
-        
-        gp=new GamePanel();
-        gp.setWidth(xSize-20);
-        gp.setHeigth(ySize-50);
-        gp.setX(20);
-        gp.setY(10);
-        gp.setColor(Color.WHITE);
+        myMouse=new MyMouse();
+        myMouse.setmMouseConector(this);
+        this.addMouseListener(this.myMouse);
+        this.addMouseMotionListener(this.myMouse);
+        this.mContenedor=new Contenedor();
+        this.limites=this.jPanel2.getBounds();
+
     }
 
     
     @Override
     public void paint(Graphics g) {
         super.paint(g); 
-        gp.paint(g);
+        this.mContenedor.paint(g);
         
     }
 
@@ -55,21 +60,89 @@ public class GameClient   extends javax.swing.JFrame{
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPanel1 = new javax.swing.JPanel();
+        jBlinea = new javax.swing.JButton();
+        jBInicio = new javax.swing.JButton();
+        jBFIn = new javax.swing.JButton();
+        jBEntrada = new javax.swing.JButton();
+        jBProceso = new javax.swing.JButton();
+        jBCondicional = new javax.swing.JButton();
+        jBBucle = new javax.swing.JButton();
+        jBSalida = new javax.swing.JButton();
+        jPanel2 = new javax.swing.JPanel();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Figuras"));
+        jPanel1.setLayout(new java.awt.GridLayout(8, 1));
+
+        jBlinea.setText("Linea Flujo");
+        jBlinea.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBlineaActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jBlinea);
+
+        jBInicio.setText("Inicio");
+        jPanel1.add(jBInicio);
+
+        jBFIn.setText("FIn");
+        jPanel1.add(jBFIn);
+
+        jBEntrada.setText("Entrada");
+        jPanel1.add(jBEntrada);
+
+        jBProceso.setText("Proceso");
+        jPanel1.add(jBProceso);
+
+        jBCondicional.setText("Condicional");
+        jPanel1.add(jBCondicional);
+
+        jBBucle.setText("Bucle");
+        jPanel1.add(jBBucle);
+
+        jBSalida.setText("Salida");
+        jPanel1.add(jBSalida);
+
+        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Panel Dibujo"));
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 488, Short.MAX_VALUE)
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 65, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jBlineaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBlineaActionPerformed
+        this.figura=new LineaFlujo();
+    }//GEN-LAST:event_jBlineaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -110,7 +183,47 @@ public class GameClient   extends javax.swing.JFrame{
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jBBucle;
+    private javax.swing.JButton jBCondicional;
+    private javax.swing.JButton jBEntrada;
+    private javax.swing.JButton jBFIn;
+    private javax.swing.JButton jBInicio;
+    private javax.swing.JButton jBProceso;
+    private javax.swing.JButton jBSalida;
+    private javax.swing.JButton jBlinea;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     // End of variables declaration//GEN-END:variables
+
+    @Override
+    public void initFigura(double x, double y) {
+        if(this.figura!=null){
+            if(x>=this.limites.getX() && y>=this.limites.getY()){
+                this.figura.setX(x);
+                this.figura.setY(y);
+            }else{
+                System.out.println("Esta fuera del limite");
+            }
+            
+        }
+    }
+
+    @Override
+    public void endFigura(double x, double y) {
+        if(this.figura!=null){
+            if(figura instanceof LineaFlujo){
+                this.figura.setWidth(x);
+                this.figura.setHeigth(y);
+            }else{
+                this.figura.setWidth(this.figura.getX()-x);
+                this.figura.setHeigth(this.figura.getY()-y);
+            }
+            
+            this.mContenedor.addFigura(figura);
+            this.figura=null;
+            this.repaint();
+        }
+    }
 
 
 }
