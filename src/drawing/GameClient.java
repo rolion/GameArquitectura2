@@ -10,6 +10,7 @@ package drawing;
 import Interface.Figura;
 import Interface.MouseConnector;
 import Nodes.Contenedor;
+import Nodes.Entrada;
 import Nodes.LineaFlujo;
 import java.awt.Frame;
 import java.awt.Graphics;
@@ -91,6 +92,11 @@ public class GameClient extends javax.swing.JFrame implements MouseConnector{
         jPanel1.add(jBFIn);
 
         jBEntrada.setText("Entrada");
+        jBEntrada.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBEntradaActionPerformed(evt);
+            }
+        });
         jPanel1.add(jBEntrada);
 
         jBProceso.setText("Proceso");
@@ -143,6 +149,10 @@ public class GameClient extends javax.swing.JFrame implements MouseConnector{
     private void jBlineaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBlineaActionPerformed
         this.figura=new LineaFlujo();
     }//GEN-LAST:event_jBlineaActionPerformed
+
+    private void jBEntradaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBEntradaActionPerformed
+       this.figura=new Entrada();
+    }//GEN-LAST:event_jBEntradaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -215,8 +225,8 @@ public class GameClient extends javax.swing.JFrame implements MouseConnector{
                 this.figura.setWidth(x);
                 this.figura.setHeigth(y);
             }else{
-                this.figura.setWidth(this.figura.getX()-x);
-                this.figura.setHeigth(this.figura.getY()-y);
+                this.figura.setWidth(x-this.figura.getX());
+                this.figura.setHeigth(y-this.figura.getY());
             }
             
             this.mContenedor.addFigura(figura);
