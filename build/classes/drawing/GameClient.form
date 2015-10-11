@@ -70,11 +70,17 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="Inicio"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jBInicioActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="jBFIn">
           <Properties>
             <Property name="text" type="java.lang.String" value="FIn"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jBFInActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="jBEntrada">
           <Properties>
@@ -88,6 +94,9 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="Proceso"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jBProcesoActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="jBCondicional">
           <Properties>

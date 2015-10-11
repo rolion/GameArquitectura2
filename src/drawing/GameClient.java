@@ -11,7 +11,10 @@ import Interface.Figura;
 import Interface.MouseConnector;
 import Nodes.Contenedor;
 import Nodes.Entrada;
+import Nodes.Fin;
+import Nodes.Inicio;
 import Nodes.LineaFlujo;
+import Nodes.Proceso;
 import java.awt.Frame;
 import java.awt.Graphics;
 import java.awt.Rectangle;
@@ -86,9 +89,19 @@ public class GameClient extends javax.swing.JFrame implements MouseConnector{
         jPanel1.add(jBlinea);
 
         jBInicio.setText("Inicio");
+        jBInicio.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBInicioActionPerformed(evt);
+            }
+        });
         jPanel1.add(jBInicio);
 
         jBFIn.setText("FIn");
+        jBFIn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBFInActionPerformed(evt);
+            }
+        });
         jPanel1.add(jBFIn);
 
         jBEntrada.setText("Entrada");
@@ -100,6 +113,11 @@ public class GameClient extends javax.swing.JFrame implements MouseConnector{
         jPanel1.add(jBEntrada);
 
         jBProceso.setText("Proceso");
+        jBProceso.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBProcesoActionPerformed(evt);
+            }
+        });
         jPanel1.add(jBProceso);
 
         jBCondicional.setText("Condicional");
@@ -153,6 +171,18 @@ public class GameClient extends javax.swing.JFrame implements MouseConnector{
     private void jBEntradaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBEntradaActionPerformed
        this.figura=new Entrada();
     }//GEN-LAST:event_jBEntradaActionPerformed
+
+    private void jBProcesoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBProcesoActionPerformed
+        this.figura=new Proceso();
+    }//GEN-LAST:event_jBProcesoActionPerformed
+
+    private void jBInicioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBInicioActionPerformed
+        this.figura=new Inicio();
+    }//GEN-LAST:event_jBInicioActionPerformed
+
+    private void jBFInActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBFInActionPerformed
+        this.figura=new Fin();
+    }//GEN-LAST:event_jBFInActionPerformed
 
     /**
      * @param args the command line arguments
@@ -224,11 +254,23 @@ public class GameClient extends javax.swing.JFrame implements MouseConnector{
             if(figura instanceof LineaFlujo){
                 this.figura.setWidth(x);
                 this.figura.setHeigth(y);
-            }else{
+            }
+            if(figura instanceof Entrada){
                 this.figura.setWidth(x-this.figura.getX());
                 this.figura.setHeigth(y-this.figura.getY());
             }
-            
+            if(figura instanceof Proceso){
+                ((Proceso)this.figura).setX2(x);
+                ((Proceso)this.figura).setY2(y);
+            }
+            if(figura instanceof Inicio){
+               this.figura.setWidth(x-this.figura.getX());
+                this.figura.setHeigth(y-this.figura.getY());
+            }
+            if(figura instanceof Fin){
+               this.figura.setWidth(x-this.figura.getX());
+                this.figura.setHeigth(y-this.figura.getY());
+            }
             this.mContenedor.addFigura(figura);
             this.figura=null;
             this.repaint();

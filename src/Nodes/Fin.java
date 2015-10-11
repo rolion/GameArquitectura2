@@ -8,6 +8,9 @@ package Nodes;
 import Interface.Figura;
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.geom.Ellipse2D;
+import java.awt.geom.Line2D;
 
 /**
  *
@@ -26,7 +29,15 @@ public class Fin extends Figura{
 
     @Override
     public void paint(Graphics g) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+         Graphics2D g2 = (Graphics2D) g;
+        g2.draw(new Ellipse2D.Double(this.getX(), this.getY(),
+                             this.getWidth(),this.getHeigth()));
+        double xMedio=this.getX()+Math.abs(this.getWidth()/2);
+        double yMedio=this.getY()+Math.abs(this.getHeigth()/2);
+        g2.draw(new Line2D.Double(xMedio-30, yMedio-30,
+                xMedio+30, yMedio+30));
+        g2.draw(new Line2D.Double(xMedio+30, yMedio-30,
+                xMedio-30, yMedio+30));
     }
 
     
