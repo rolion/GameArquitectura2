@@ -28,8 +28,8 @@ public class LineaFlujo extends Figura{
     @Override
     public void paint(Graphics g) {
         Graphics2D g2 = (Graphics2D) g;
-        g2.draw(new Line2D.Double(this.getX(), this.getY(),
-                this.getWidth(), this.getHeigth()));
+        g2.draw(new Line2D.Double(this.getX1(), this.getY1(),
+                this.getX2(), this.getY2()));
     }
 
 

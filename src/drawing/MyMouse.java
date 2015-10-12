@@ -7,9 +7,7 @@ package drawing;
 
 import Interface.MouseConnector;
 import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 import javax.swing.event.MouseInputAdapter;
-import javax.swing.event.MouseInputListener;
 
 /**
  *

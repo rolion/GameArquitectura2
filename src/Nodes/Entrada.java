@@ -29,8 +29,11 @@ public class Entrada extends Figura{
     @Override
     public void paint(Graphics g) {
          Graphics2D g2 = (Graphics2D) g;
-         g2.draw(new Rectangle2D.Double(this.getX(), this.getY(),
-                               getWidth(), getHeigth()));
+         this.setWidth(this.getX2()-this.getX1());
+         this.setHeigth(this.getY2()-this.getY1());
+         g2.draw(new Rectangle2D.Double(this.getX1(), this.getY1(),
+                               this.getWidth(), this.getHeigth()));
+         g2.drawString("HOla esta es una entrada de texto", (int)this.getX1(), (int)this.getY2());
     }
 
 

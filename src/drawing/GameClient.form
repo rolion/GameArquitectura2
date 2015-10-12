@@ -102,11 +102,17 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="Condicional"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jBCondicionalActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="jBBucle">
           <Properties>
             <Property name="text" type="java.lang.String" value="Bucle"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jBBucleActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="jBSalida">
           <Properties>

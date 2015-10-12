@@ -9,6 +9,8 @@ package drawing;
 
 import Interface.Figura;
 import Interface.MouseConnector;
+import Nodes.Bucle;
+import Nodes.Condicional;
 import Nodes.Contenedor;
 import Nodes.Entrada;
 import Nodes.Fin;
@@ -121,9 +123,19 @@ public class GameClient extends javax.swing.JFrame implements MouseConnector{
         jPanel1.add(jBProceso);
 
         jBCondicional.setText("Condicional");
+        jBCondicional.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBCondicionalActionPerformed(evt);
+            }
+        });
         jPanel1.add(jBCondicional);
 
         jBBucle.setText("Bucle");
+        jBBucle.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBBucleActionPerformed(evt);
+            }
+        });
         jPanel1.add(jBBucle);
 
         jBSalida.setText("Salida");
@@ -184,6 +196,14 @@ public class GameClient extends javax.swing.JFrame implements MouseConnector{
         this.figura=new Fin();
     }//GEN-LAST:event_jBFInActionPerformed
 
+    private void jBBucleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBBucleActionPerformed
+        this.figura=new Bucle();
+    }//GEN-LAST:event_jBBucleActionPerformed
+
+    private void jBCondicionalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBCondicionalActionPerformed
+        this.figura=new Condicional();
+    }//GEN-LAST:event_jBCondicionalActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -239,8 +259,8 @@ public class GameClient extends javax.swing.JFrame implements MouseConnector{
     public void initFigura(double x, double y) {
         if(this.figura!=null){
             if(x>=this.limites.getX() && y>=this.limites.getY()){
-                this.figura.setX(x);
-                this.figura.setY(y);
+                this.figura.setX1(x);
+                this.figura.setY1(y);
             }else{
                 System.out.println("Esta fuera del limite");
             }
@@ -251,26 +271,9 @@ public class GameClient extends javax.swing.JFrame implements MouseConnector{
     @Override
     public void endFigura(double x, double y) {
         if(this.figura!=null){
-            if(figura instanceof LineaFlujo){
-                this.figura.setWidth(x);
-                this.figura.setHeigth(y);
-            }
-            if(figura instanceof Entrada){
-                this.figura.setWidth(x-this.figura.getX());
-                this.figura.setHeigth(y-this.figura.getY());
-            }
-            if(figura instanceof Proceso){
-                ((Proceso)this.figura).setX2(x);
-                ((Proceso)this.figura).setY2(y);
-            }
-            if(figura instanceof Inicio){
-               this.figura.setWidth(x-this.figura.getX());
-                this.figura.setHeigth(y-this.figura.getY());
-            }
-            if(figura instanceof Fin){
-               this.figura.setWidth(x-this.figura.getX());
-                this.figura.setHeigth(y-this.figura.getY());
-            }
+
+            this.figura.setX2(x);
+            this.figura.setY2(y);
             this.mContenedor.addFigura(figura);
             this.figura=null;
             this.repaint();

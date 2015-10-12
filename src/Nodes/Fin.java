@@ -17,27 +17,33 @@ import java.awt.geom.Line2D;
  * @author root
  */
 public class Fin extends Figura{
+    
+
 
     public Fin(double x, double y, double width, double heigth, Color color) {
         super(x, y, width, heigth, color);
+        this.dif=5;
     }
 
     public Fin() {
+        this.dif=5;
     }
     
     
-
+    private double dif;
     @Override
     public void paint(Graphics g) {
          Graphics2D g2 = (Graphics2D) g;
-        g2.draw(new Ellipse2D.Double(this.getX(), this.getY(),
-                             this.getWidth(),this.getHeigth()));
-        double xMedio=this.getX()+Math.abs(this.getWidth()/2);
-        double yMedio=this.getY()+Math.abs(this.getHeigth()/2);
-        g2.draw(new Line2D.Double(xMedio-30, yMedio-30,
-                xMedio+30, yMedio+30));
-        g2.draw(new Line2D.Double(xMedio+30, yMedio-30,
-                xMedio-30, yMedio+30));
+         this.setWidth( this.getX2()-this.getX1());
+         this.setHeigth(this.getY2()-this.getY1());
+        g2.draw(new Ellipse2D.Double(this.getX1(), this.getY1(),
+                            this.getWidth(),this.getHeigth()));
+        double xMedio=this.getX1()+Math.abs(this.getWidth()/2);
+        double yMedio=this.getY1()+Math.abs(this.getHeigth()/2);
+        g2.draw(new Line2D.Double(xMedio-this.dif, yMedio-this.dif,
+                xMedio+this.dif, yMedio+this.dif));
+        g2.draw(new Line2D.Double(xMedio+this.dif, yMedio-this.dif,
+                xMedio-this.dif, yMedio+this.dif));
     }
 
     
