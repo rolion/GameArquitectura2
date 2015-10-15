@@ -20,8 +20,17 @@ public abstract class Figura  {
     private double width;
     private double heigth;
     private Color color;
+    private String comando;
 
     public Figura() {
+        this.comando="";
+        this.x1 = 0;
+        this.y1 = 0;
+        this.x2 = 0;
+        this.y2 = 0;
+        this.width = 0;
+        this.heigth = 0;
+        this.color = null;
     }
 
     public Figura(double x1, double y1, double x2, double y2, double width, double heigth, Color color) {
@@ -32,7 +41,18 @@ public abstract class Figura  {
         this.width = width;
         this.heigth = heigth;
         this.color = color;
+        this.comando="";
     }
+
+    public String getComando() {
+        return comando;
+    }
+
+    public void setComando(String comando) {
+        this.comando = comando;
+    }
+    
+    
 
     public double getWidth() {
         return width;
@@ -105,11 +125,9 @@ public abstract class Figura  {
     public void setColor(Color color) {
         this.color = color;
     }
-
-    
-
-   
-    
-    
     public abstract void paint(Graphics g);
+
+ 
+    
+    
 }

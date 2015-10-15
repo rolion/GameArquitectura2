@@ -17,16 +17,23 @@ import java.util.ArrayList;
  */
 public class Contenedor extends Figura{
 
-    private List listaFigura;
+    private ArrayList listaFigura;
 
-    public Contenedor(double x, double y, double width, double heigth, Color color) {
-        super(x, y, width, heigth, color);
-        this.listaFigura=new ArrayList();
+    public Contenedor(ArrayList listaFiguras) {
+        this.listaFigura=listaFiguras;
     }
-
     public Contenedor() {
         this.listaFigura=new ArrayList();
     }
+
+    public ArrayList getListaFigura() {
+        return listaFigura;
+    }
+
+    public void setListaFigura(ArrayList listaFigura) {
+        this.listaFigura = listaFigura;
+    }
+    
     
     public void addFigura(Figura f){
         this.listaFigura.add(f);
@@ -38,7 +45,38 @@ public class Contenedor extends Figura{
                 figura.paint(g);
         }
     }
+    public ContenedorMemento getMemento() throws CloneNotSupportedException{
+        return new ContenedorMemento(this.clone());
+    }
+    public void setMemento(Object o){
+        if(o instanceof ContenedorMemento){
+            ContenedorMemento memento= (ContenedorMemento) o;
+            this.listaFigura= ((Contenedor) memento.getMemento()).getListaFigura();
+        }
+    }
+    @Override
+    protected Object clone() throws CloneNotSupportedException {
+            
+        Contenedor contenedor=new Contenedor( (ArrayList)this.listaFigura.clone());
+        return contenedor;
+    }
+    private class ContenedorMemento{
+        private Object memento;
 
+        public ContenedorMemento() {
+        }
+
+        public ContenedorMemento(Object memento) {
+            this.memento = memento;
+        }
+        
+        public void setMemento(Object o){
+            this.memento=0;
+        }
+        public Object getMemento(){
+            return this.memento;
+        }
+    }
     
     
 }

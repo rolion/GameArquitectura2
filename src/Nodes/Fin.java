@@ -45,7 +45,18 @@ public class Fin extends Figura{
         g2.draw(new Line2D.Double(xMedio+this.dif, yMedio-this.dif,
                 xMedio-this.dif, yMedio+this.dif));
     }
-
+    @Override
+    protected Object clone() throws CloneNotSupportedException {
+        Fin fin=new Fin();
+        fin.setX1(this.getX1());
+        fin.setY1(this.getY1());
+        fin.setX2(this.getX2());
+        fin.setY2(this.getY2());
+        fin.setWidth(this.getWidth());
+        fin.setHeigth(this.getHeigth());
+        fin.setColor(this.getColor());
+        return fin;
+    }
     
     
 }

@@ -17,10 +17,14 @@ import Nodes.Fin;
 import Nodes.Inicio;
 import Nodes.LineaFlujo;
 import Nodes.Proceso;
+import Nodes.Salida;
 import java.awt.Frame;
 import java.awt.Graphics;
 import java.awt.Rectangle;
 import java.awt.Toolkit;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import javax.swing.border.Border;
 /**
  *
@@ -35,8 +39,10 @@ public class GameClient extends javax.swing.JFrame implements MouseConnector{
     private Figura figura;
     private Contenedor mContenedor;
     private Rectangle limites;
+    private StateHolder concerje;
     public GameClient() {
         initComponents();
+        this.concerje=new StateHolder();
         Toolkit tk = Toolkit.getDefaultToolkit();
         double xSize = ( tk.getScreenSize().getWidth());
         double ySize = ( tk.getScreenSize().getHeight());
@@ -76,6 +82,9 @@ public class GameClient extends javax.swing.JFrame implements MouseConnector{
         jBBucle = new javax.swing.JButton();
         jBSalida = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
+        jPanel3 = new javax.swing.JPanel();
+        jButton1 = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -139,35 +148,63 @@ public class GameClient extends javax.swing.JFrame implements MouseConnector{
         jPanel1.add(jBBucle);
 
         jBSalida.setText("Salida");
+        jBSalida.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBSalidaActionPerformed(evt);
+            }
+        });
         jPanel1.add(jBSalida);
 
-        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Panel Dibujo"));
+        jPanel2.setBackground(new java.awt.Color(255, 255, 255));
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 488, Short.MAX_VALUE)
+            .addGap(0, 486, Short.MAX_VALUE)
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 0, Short.MAX_VALUE)
         );
 
+        jPanel3.setLayout(new javax.swing.BoxLayout(jPanel3, javax.swing.BoxLayout.LINE_AXIS));
+
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/back57.png"))); // NOI18N
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        jPanel3.add(jButton1);
+
+        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/forward18.png"))); // NOI18N
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+        jPanel3.add(jButton3);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(36, 36, 36))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 65, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(146, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -182,14 +219,17 @@ public class GameClient extends javax.swing.JFrame implements MouseConnector{
 
     private void jBEntradaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBEntradaActionPerformed
        this.figura=new Entrada();
+       this.figura.setComando(JOptionPane.showInputDialog(this, "Parametro", "Entrada", JOptionPane.QUESTION_MESSAGE));
     }//GEN-LAST:event_jBEntradaActionPerformed
 
     private void jBProcesoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBProcesoActionPerformed
         this.figura=new Proceso();
+        this.figura.setComando(JOptionPane.showInputDialog(this, "Parametro", "Proceso", JOptionPane.QUESTION_MESSAGE));
     }//GEN-LAST:event_jBProcesoActionPerformed
 
     private void jBInicioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBInicioActionPerformed
         this.figura=new Inicio();
+        
     }//GEN-LAST:event_jBInicioActionPerformed
 
     private void jBFInActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBFInActionPerformed
@@ -198,11 +238,31 @@ public class GameClient extends javax.swing.JFrame implements MouseConnector{
 
     private void jBBucleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBBucleActionPerformed
         this.figura=new Bucle();
+        this.figura.setComando(JOptionPane.showInputDialog(this, "Parametro", "Bucle", JOptionPane.QUESTION_MESSAGE));
     }//GEN-LAST:event_jBBucleActionPerformed
 
     private void jBCondicionalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBCondicionalActionPerformed
         this.figura=new Condicional();
+        this.figura.setComando(JOptionPane.showInputDialog(this, "Parametro", "Condicion", JOptionPane.QUESTION_MESSAGE));
     }//GEN-LAST:event_jBCondicionalActionPerformed
+
+    private void jBSalidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBSalidaActionPerformed
+        // TODO add your handling code here:
+        this.figura=new Salida();
+        this.figura.setComando(JOptionPane.showInputDialog(this, "Parametro", "Salida", JOptionPane.QUESTION_MESSAGE));
+    }//GEN-LAST:event_jBSalidaActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        Object memento =this.concerje.moveBackWard();
+        this.mContenedor.setMemento(memento);
+        this.repaint();
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        Object memento =this.concerje.moveForWard();
+        this.mContenedor.setMemento(memento);
+        this.repaint();
+    }//GEN-LAST:event_jButton3ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -251,8 +311,11 @@ public class GameClient extends javax.swing.JFrame implements MouseConnector{
     private javax.swing.JButton jBProceso;
     private javax.swing.JButton jBSalida;
     private javax.swing.JButton jBlinea;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
     // End of variables declaration//GEN-END:variables
 
     @Override
@@ -275,6 +338,11 @@ public class GameClient extends javax.swing.JFrame implements MouseConnector{
             this.figura.setX2(x);
             this.figura.setY2(y);
             this.mContenedor.addFigura(figura);
+            try {
+                this.concerje.addMemento(this.mContenedor.getMemento());
+            } catch (CloneNotSupportedException ex) {
+                Logger.getLogger(GameClient.class.getName()).log(Level.SEVERE, null, ex);
+            }
             this.figura=null;
             this.repaint();
         }

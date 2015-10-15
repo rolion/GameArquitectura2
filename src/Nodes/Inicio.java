@@ -35,7 +35,18 @@ public class Inicio extends Figura{
         g2.draw(new Ellipse2D.Double(this.getX1(), this.getY1(),
                              this.getWidth(),this.getHeigth()));
     }
-
+    @Override
+    protected Object clone() throws CloneNotSupportedException {
+        Inicio inicio=new Inicio();
+        inicio.setX1(this.getX1());
+        inicio.setY1(this.getY1());
+        inicio.setX2(this.getX2());
+        inicio.setY2(this.getY2());
+        inicio.setWidth(this.getWidth());
+        inicio.setHeigth(this.getHeigth());
+        inicio.setColor(this.getColor());
+        return inicio;
+    }
    
     
 }

@@ -32,6 +32,17 @@ public class LineaFlujo extends Figura{
                 this.getX2(), this.getY2()));
     }
 
-
+    @Override
+    protected Object clone() throws CloneNotSupportedException {
+        LineaFlujo linea=new LineaFlujo();
+        linea.setX1(this.getX1());
+        linea.setY1(this.getY1());
+        linea.setX2(this.getX2());
+        linea.setY2(this.getY2());
+        linea.setWidth(this.getWidth());
+        linea.setHeigth(this.getHeigth());
+        linea.setColor(this.getColor());
+        return linea;
+    }
     
 }

@@ -8,6 +8,9 @@ package Nodes;
 import Interface.Figura;
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.geom.GeneralPath;
+import java.awt.geom.QuadCurve2D;
 
 /**
  *
@@ -25,9 +28,37 @@ public class Salida extends Figura{
     
     @Override
     public void paint(Graphics g) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Graphics2D g2 = (Graphics2D) g;
+        this.setWidth(this.getX2()-this.getX1());
+        this.setHeigth(this.getY2()-this.getY1());
+        GeneralPath polyline = 
+        new GeneralPath(GeneralPath.WIND_EVEN_ODD, 5);
+        polyline.moveTo (this.getX1(), this.getY1());
+        polyline.lineTo(this.getX1(), this.getY2());
+        polyline.curveTo(this.getX1(), this.getY2(), //punto incial
+                this.getX1()+this.getWidth()/8, this.getY2()+100,//curva
+                this.getX1()+this.getWidth()/2, this.getY2());
+        polyline.lineTo(this.getX2(), this.getY2());
+        polyline.lineTo(this.getX2(), this.getY1());
+        polyline.lineTo(this.getX1(), this.getY1());
+        g2.draw(polyline);
+        if(!this.getComando().isEmpty()){
+            g2.drawString(this.getComando(), (int)(this.getX1()-10+this.getWidth()/2), 
+                 (int)(this.getY1()+this.getHeigth()/2));
+        }
     }
-
+    @Override
+    protected Object clone() throws CloneNotSupportedException {
+        Salida Salida=new Salida();
+        Salida.setX1(this.getX1());
+        Salida.setY1(this.getY1());
+        Salida.setX2(this.getX2());
+        Salida.setY2(this.getY2());
+        Salida.setWidth(this.getWidth());
+        Salida.setHeigth(this.getHeigth());
+        Salida.setColor(this.getColor());
+        return Salida;
+    }
     
     
 }

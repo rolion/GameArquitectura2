@@ -33,11 +33,28 @@ public class Bucle extends Figura{
         Graphics2D g2 = (Graphics2D) g;
         this.setWidth(this.getX2()-this.getX1());
         this.setHeigth(this.getY2()-this.getY1());
-        g2.draw(new RoundRectangle2D.Double(this.getX1(), this.getY2(),
+        g2.draw(new RoundRectangle2D.Double(this.getX1(), this.getY1(),
                                    this.getWidth(),this.getHeigth(),
                                    20, 20));
+        if(!this.getComando().isEmpty()){
+            g2.drawString(this.getComando(), (int)(this.getX1()-10+this.getWidth()/2), 
+                 (int)(this.getY1()+this.getHeigth()/2));
+        }
     }
 
+    @Override
+    protected Object clone() throws CloneNotSupportedException {
+        Bucle bucle=new Bucle();
+        bucle.setX1(this.getX1());
+        bucle.setY1(this.getY1());
+        bucle.setX2(this.getX2());
+        bucle.setY2(this.getY2());
+        bucle.setWidth(this.getWidth());
+        bucle.setHeigth(this.getHeigth());
+        bucle.setColor(this.getColor());
+        return bucle;
+    }
+    
 
     
 }
