@@ -46,7 +46,7 @@ public class Fin extends Figura{
                 xMedio-this.dif, yMedio+this.dif));
     }
     @Override
-    protected Object clone() throws CloneNotSupportedException {
+    public Object clonar() {
         Fin fin=new Fin();
         fin.setX1(this.getX1());
         fin.setY1(this.getY1());

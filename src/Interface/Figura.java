@@ -127,7 +127,7 @@ public abstract class Figura  {
     }
     public abstract void paint(Graphics g);
 
- 
+    public abstract Object clonar();
     
     
 }

@@ -35,17 +35,18 @@ public class StateHolder {
             case -1: return null;
             case 0: return null;
             default:
-                    Object o= this.mementos.get(puntero-1);
                     this.puntero--;
-                    return o;
+                    if(this.puntero>=0)
+                        return this.mementos.get(puntero);
+                    else
+                        return null;
         }
     }
     public Object moveForWard(){//vuelve a un estado adelante del actual
         if(!this.mementos.isEmpty()){
             if(this.puntero<this.mementos.size()-1){
-                Object o=this.mementos.get(puntero+1);
                 this.puntero++;
-                return o;
+                return this.mementos.get(puntero);
             }
         }
             return null;

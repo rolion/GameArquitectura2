@@ -42,22 +42,24 @@ public class Salida extends Figura{
         polyline.lineTo(this.getX2(), this.getY1());
         polyline.lineTo(this.getX1(), this.getY1());
         g2.draw(polyline);
-        if(!this.getComando().isEmpty()){
+        if(this.getComando()!=null && !this.getComando().isEmpty()){
             g2.drawString(this.getComando(), (int)(this.getX1()-10+this.getWidth()/2), 
                  (int)(this.getY1()+this.getHeigth()/2));
         }
     }
+
     @Override
-    protected Object clone() throws CloneNotSupportedException {
-        Salida Salida=new Salida();
-        Salida.setX1(this.getX1());
-        Salida.setY1(this.getY1());
-        Salida.setX2(this.getX2());
-        Salida.setY2(this.getY2());
-        Salida.setWidth(this.getWidth());
-        Salida.setHeigth(this.getHeigth());
-        Salida.setColor(this.getColor());
-        return Salida;
+    public Object clonar() {
+        Salida salida=new Salida();
+        salida.setX1(this.getX1());
+        salida.setY1(this.getY1());
+        salida.setX2(this.getX2());
+        salida.setY2(this.getY2());
+        salida.setWidth(this.getWidth());
+        salida.setHeigth(this.getHeigth());
+        salida.setColor(this.getColor());
+        salida.setComando(this.getComando());
+        return salida;
     }
     
     

@@ -42,13 +42,14 @@ public class Condicional extends Figura{
        polygon.lineTo(this.getX1()+this.getWidth()/2,this.getY1());
        polygon.closePath();
        g2.draw(polygon);
-       if(!this.getComando().isEmpty()){
+       if(this.getComando()!=null &&  !this.getComando().isEmpty()){
             g2.drawString(this.getComando(), (int)(this.getX1()-10+this.getWidth()/2), 
                  (int)(this.getY1()+this.getHeigth()/2));
         }
     }
+
     @Override
-    protected Object clone() throws CloneNotSupportedException {
+    public Object clonar() {
         Condicional condicional=new Condicional();
         condicional.setX1(this.getX1());
         condicional.setY1(this.getY1());
@@ -57,6 +58,7 @@ public class Condicional extends Figura{
         condicional.setWidth(this.getWidth());
         condicional.setHeigth(this.getHeigth());
         condicional.setColor(this.getColor());
+        condicional.setComando(this.getComando());
         return condicional;
     }
     

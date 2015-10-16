@@ -33,13 +33,13 @@ public class Entrada extends Figura{
         this.setHeigth(this.getY2()-this.getY1());
         g2.draw(new Rectangle2D.Double(this.getX1(), this.getY1(),
                               this.getWidth(), this.getHeigth()));
-        if(!this.getComando().isEmpty()){
+        if(this.getComando()!=null && !this.getComando().isEmpty()){
             g2.drawString(this.getComando(), (int)(this.getX1()-10+this.getWidth()/2), 
                  (int)(this.getY1()+this.getHeigth()/2));
         }
     }
     @Override
-    protected Object clone() throws CloneNotSupportedException {
+    public Object clonar() {
         Entrada entrada=new Entrada();
         entrada.setX1(this.getX1());
         entrada.setY1(this.getY1());
@@ -48,6 +48,7 @@ public class Entrada extends Figura{
         entrada.setWidth(this.getWidth());
         entrada.setHeigth(this.getHeigth());
         entrada.setColor(this.getColor());
+        entrada.setComando(this.getComando());
         return entrada;
     }
 

@@ -18,12 +18,15 @@ import java.util.ArrayList;
 public class Contenedor extends Figura{
 
     private ArrayList listaFigura;
+    private Memento memento;
 
     public Contenedor(ArrayList listaFiguras) {
         this.listaFigura=listaFiguras;
+        
     }
     public Contenedor() {
         this.listaFigura=new ArrayList();
+        
     }
 
     public ArrayList getListaFigura() {
@@ -45,33 +48,40 @@ public class Contenedor extends Figura{
                 figura.paint(g);
         }
     }
-    public ContenedorMemento getMemento() throws CloneNotSupportedException{
-        return new ContenedorMemento(this.clone());
+    public Memento getMemento() {
+        this.memento=new Memento(this.clonar());
+        return this.memento;
     }
     public void setMemento(Object o){
-        if(o instanceof ContenedorMemento){
-            ContenedorMemento memento= (ContenedorMemento) o;
-            this.listaFigura= ((Contenedor) memento.getMemento()).getListaFigura();
+        if(o instanceof Memento){
+            this.memento= (Memento) o;
+            Contenedor c=(Contenedor) memento.getMemento();
+            this.listaFigura= c.getListaFigura();
         }
     }
+
     @Override
-    protected Object clone() throws CloneNotSupportedException {
-            
-        Contenedor contenedor=new Contenedor( (ArrayList)this.listaFigura.clone());
-        return contenedor;
+    public Object clonar() {
+        ArrayList clon=new ArrayList();
+        for (Object figura : this.listaFigura) {
+            Figura f=(Figura)figura;
+            clon.add(f.clonar());
+        }
+        return new Contenedor(clon);
     }
-    private class ContenedorMemento{
+    private class Memento{
         private Object memento;
 
-        public ContenedorMemento() {
+        public Memento() {
+            this.memento=null;
         }
 
-        public ContenedorMemento(Object memento) {
+        public Memento(Object memento) {
             this.memento = memento;
         }
         
         public void setMemento(Object o){
-            this.memento=0;
+            this.memento=o;
         }
         public Object getMemento(){
             return this.memento;

@@ -22,10 +22,8 @@ import java.awt.Frame;
 import java.awt.Graphics;
 import java.awt.Rectangle;
 import java.awt.Toolkit;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
-import javax.swing.border.Border;
+
 /**
  *
  * @author root
@@ -42,7 +40,7 @@ public class GameClient extends javax.swing.JFrame implements MouseConnector{
     private StateHolder concerje;
     public GameClient() {
         initComponents();
-        this.concerje=new StateHolder();
+        
         Toolkit tk = Toolkit.getDefaultToolkit();
         double xSize = ( tk.getScreenSize().getWidth());
         double ySize = ( tk.getScreenSize().getHeight());
@@ -50,7 +48,9 @@ public class GameClient extends javax.swing.JFrame implements MouseConnector{
         myMouse.setmMouseConector(this);
         this.addMouseListener(this.myMouse);
         this.addMouseMotionListener(this.myMouse);
+        this.concerje=new StateHolder();
         this.mContenedor=new Contenedor();
+        this.concerje.addMemento(this.mContenedor.getMemento());
         this.limites=this.jPanel2.getBounds();
 
     }
@@ -338,11 +338,7 @@ public class GameClient extends javax.swing.JFrame implements MouseConnector{
             this.figura.setX2(x);
             this.figura.setY2(y);
             this.mContenedor.addFigura(figura);
-            try {
-                this.concerje.addMemento(this.mContenedor.getMemento());
-            } catch (CloneNotSupportedException ex) {
-                Logger.getLogger(GameClient.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            this.concerje.addMemento(this.mContenedor.getMemento());
             this.figura=null;
             this.repaint();
         }

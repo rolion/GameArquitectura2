@@ -46,9 +46,10 @@ public class Proceso extends Figura{
             g2.drawString(this.getComando(), (int)(this.getX1()-10+this.getWidth()/2), 
                  (int)(this.getY1()+this.getHeigth()/2));
         }
-    }
+    }  
+
     @Override
-    protected Object clone() throws CloneNotSupportedException {
+    public Object clonar() {
         Proceso proceso=new Proceso();
         proceso.setX1(this.getX1());
         proceso.setY1(this.getY1());
@@ -57,8 +58,9 @@ public class Proceso extends Figura{
         proceso.setWidth(this.getWidth());
         proceso.setHeigth(this.getHeigth());
         proceso.setColor(this.getColor());
-        return proceso;
-    }    
+        proceso.setComando(this.getComando());
+        return proceso;        
+    }
 
     
     

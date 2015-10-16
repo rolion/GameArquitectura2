@@ -36,14 +36,14 @@ public class Bucle extends Figura{
         g2.draw(new RoundRectangle2D.Double(this.getX1(), this.getY1(),
                                    this.getWidth(),this.getHeigth(),
                                    20, 20));
-        if(!this.getComando().isEmpty()){
+        if(this.getComando()!=null &&  !this.getComando().isEmpty()){
             g2.drawString(this.getComando(), (int)(this.getX1()-10+this.getWidth()/2), 
                  (int)(this.getY1()+this.getHeigth()/2));
         }
     }
 
     @Override
-    protected Object clone() throws CloneNotSupportedException {
+    public Object clonar() {
         Bucle bucle=new Bucle();
         bucle.setX1(this.getX1());
         bucle.setY1(this.getY1());
@@ -52,6 +52,7 @@ public class Bucle extends Figura{
         bucle.setWidth(this.getWidth());
         bucle.setHeigth(this.getHeigth());
         bucle.setColor(this.getColor());
+        bucle.setComando(this.getComando());
         return bucle;
     }
     
